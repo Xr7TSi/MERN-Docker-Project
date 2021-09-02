@@ -4,9 +4,10 @@ import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { createPost } from "../../actions/posts";
 
+
 import useStyles from "./styles";
 
-const Form = () => {
+const Form = ( { currentId, stCurrentId}) => {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",

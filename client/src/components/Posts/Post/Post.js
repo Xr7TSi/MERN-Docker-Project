@@ -18,6 +18,7 @@ const Post = ({ post }) => {
                 <Typography variant="h6">{post.creator}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
+            {/* three dot (edit) button over image */}
             <div className={classes.overlay2}>
                 <Button style={{color: 'white'}} size="small" onClick={() => {} }>
                     <MoreHorizIcon frontSize="default" />
