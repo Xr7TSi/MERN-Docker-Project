@@ -12,7 +12,7 @@ const App = () => {
   const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
-  
+
   // useEffect will dispatch getPosts when currentID changes, or when any function is dispatched.
   useEffect(() => {
     dispatch(getPosts());
@@ -34,6 +34,7 @@ const App = () => {
       <Grow in>
         <Container>
           <Grid
+            className={classes.mainContainer}
             container
             justifyContent="space-between"
             alignItems="stretch"
@@ -43,7 +44,7 @@ const App = () => {
               <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId}/>
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
