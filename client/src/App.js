@@ -13,9 +13,10 @@ const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   
+  // useEffect will dispatch getPosts when currentID changes, or when any function is dispatched.
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
 
   return (
     <Container maxWidth="lg">
