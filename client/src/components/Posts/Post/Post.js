@@ -1,15 +1,15 @@
 import React from 'react';
-import useStyles from './styles';
+
 // see more about material-ui components at: https://material-ui.com/
 import { Card, CardActions, CardContent, CardMedia, Button, Typography  } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
-
+import useStyles from './styles';
 
 // ({ post }) gets post prop from parent component
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
@@ -20,7 +20,11 @@ const Post = ({ post }) => {
             </div>
             {/* three dot (edit) button over image */}
             <div className={classes.overlay2}>
-                <Button style={{color: 'white'}} size="small" onClick={() => {} }>
+                 {/* onClick setCurrentId is set to equal post._id> */}
+                <Button 
+                style={{color: 'white'}} 
+                size="small" 
+                onClick={() => setCurrentId(post._id)}>
                     <MoreHorizIcon frontSize="default" />
                 </Button>
             </div>
@@ -34,7 +38,7 @@ const Post = ({ post }) => {
 
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={() => {} }>
-                    <ThumbUpAltIcon fontSize="small" />
+                    <ThumbUpAltIcon fontsize="small" />
                     Like
                     {post.likeCount}
                 </Button>
