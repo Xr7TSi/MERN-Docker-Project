@@ -19,7 +19,7 @@ const Form = ( { currentId, setCurrentId}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  // useEffect populates the form with the current post data
+  // useEffect populates the form with the current post data.  [] is the dependency array-- when post changes, run ueEffect.
   useEffect(() => {
     if(post) setPostData(post);
   }, [post]);
@@ -31,9 +31,20 @@ const Form = ( { currentId, setCurrentId}) => {
     } else{
       dispatch(createPost(postData));
     }
+    clear();
   };
 
-  const clear = () => {};
+  // onClick function for CLEAR button (created below) on e memory form.  sets currentId to null, all fields tp empty strings.
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({ 
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
+  };
 
   return (
     <Paper className={classes.paper}>
@@ -43,7 +54,8 @@ const Form = ( { currentId, setCurrentId}) => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Creating a Memory</Typography>
+        {/* ternary operator-- if current id, show 'Edit', otherwise 'Create' on the .. a Memory form  */}
+        <Typography variant="h6">{currentId ? 'Edit' : 'Create' } a Memory</Typography>
         <TextField
           name="creator"
           variant="outlined"
@@ -95,6 +107,7 @@ const Form = ( { currentId, setCurrentId}) => {
         <Button
           className={classes.buttonSubmit}
           variant="contained"
+          // primary color defined by "@material-ui/core
           color="primary"
           size="large"
           type="submit"
@@ -104,6 +117,7 @@ const Form = ( { currentId, setCurrentId}) => {
         </Button>
         <Button
           variant="contained"
+          // secondary color defined by "@material-ui/core
           color="secondary"
           size="small"
           onClick={clear}
