@@ -35,6 +35,8 @@ const Form = ( { currentId, setCurrentId}) => {
     clear();
   };
 
+
+
   // onClick function for CLEAR button (created below) on e memory form.  sets currentId to null, all fields tp empty strings.
   const clear = () => {
     setCurrentId(null);

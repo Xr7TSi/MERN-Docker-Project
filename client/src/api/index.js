@@ -10,5 +10,8 @@ export const createPost = (newPost) => axios.post(url, newPost);
 // grabs url plus id parameter to update post
 export const updatePost = (id, updatedPost) => axios.patch(`${url}/${id}`, updatedPost);
 
+// grabs url plus id parameter to delete post
+export const deletePost = (id) => axios.delete(`${url}/${id}`);
+
 
 
