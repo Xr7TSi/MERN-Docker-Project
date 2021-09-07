@@ -1,3 +1,5 @@
+// defines how to handle the array of posts based on each action
+
 
 export default (posts = [], action) => {
     switch (action.type) {
@@ -16,9 +18,19 @@ export default (posts = [], action) => {
                 };
             });
 
+            case 'LIKE_POST':
+                return posts.map(post => {
+                    if (post._id === action.payload._id) {
+                        return action.payload;
+                    } else {
+                        return post;
+                    };
+                });    
+
         case 'DELETE_POST':
             return posts.filter((post) => post._id !== action.payload);
 
+      
         default:
             return posts;
     }   

@@ -8,7 +8,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../actions/posts';
+import { deletePost, likePost } from '../../../actions/posts';
 
 // ({ post }) gets post prop from parent component
 const Post = ({ post, setCurrentId }) => {
@@ -41,7 +41,7 @@ const Post = ({ post, setCurrentId }) => {
             </CardContent>
 
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={() => {} }>
+                <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
                     <ThumbUpAltIcon fontsize="small" />
                     Like
                     {post.likeCount}

@@ -25,8 +25,9 @@ export const updatePost = async (req, res) => {
   // get id from parameter
   const { id: _id } = req.params;
   
-  // get updated post from request body, pulled fro front end
+  // get updated post from request body, pulled from front end
   const post = req.body;
+  // send error if no id
   if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that ID')
 
   // use PostMessage model to update post
@@ -41,3 +42,10 @@ export const deletePost = async (req, res) => {
   res.json({message: 'Post deleted'}) 
 }
 
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that ID')
+  const post= await PostMessage.findById(id)
+  const updatedPost= await PostMessage.findByIdAndUpdate(id, {likeCount: post.likeCount + 1}, {new: true})
+  res.json(updatedPost)
+}
