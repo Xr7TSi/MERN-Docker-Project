@@ -1,3 +1,7 @@
+// the various dispatch actions are stored in src/reducers/posts.js
+// they are resolved to strings in src/constants/actionTypes.js
+
+
 import { FETCH_ALL_POSTS, CREATE_POST, UPDATE_POST, DELETE_POST, LIKE_POST  } from '../constants/actionTypes.js';
 // import everything from ../api in one import statement
 import * as api from '../api/index.js';
