@@ -15,7 +15,7 @@ export default makeStyles((theme) => ({
   image: {
     marginLeft: "15px",
   },
-  // mater-ui feature. at sm breakpoint, move form to top of page
+  // material-ui feature. at sm breakpoint, move form to top of page
   [theme.breakpoints.down("sm")]: {
     mainContainer: {
       flexDirection: "column-reverse",

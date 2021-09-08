@@ -1,38 +1,35 @@
 // defines how to handle the array of posts based on each action
 
-
 export default (posts = [], action) => {
-    switch (action.type) {
-        case 'FETCH_ALL':
-            return action.payload;
+  switch (action.type) {
+    case "FETCH_ALL_POSTS":
+      return action.payload;
 
-        case 'CREATE':
-            return [ ...posts, action.payload];
-        
-        case 'UPDATE_POST':
-            return posts.map(post => {
-                if (post._id === action.payload._id) {
-                    return action.payload;
-                } else {
-                    return post;
-                };
-            });
+    case "CREATE_POST":
+      return [...posts, action.payload];
 
-            case 'LIKE_POST':
-                return posts.map(post => {
-                    if (post._id === action.payload._id) {
-                        return action.payload;
-                    } else {
-                        return post;
-                    };
-                });    
+    case "UPDATE_POST":
+      return posts.map((post) => {
+        if (post._id === action.payload._id) {
+          return action.payload;
+        } else {
+          return post;
+        }
+      });
 
-        case 'DELETE_POST':
-            return posts.filter((post) => post._id !== action.payload);
+    case "DELETE_POST":
+      return posts.filter((post) => post._id !== action.payload);
 
-      
-        default:
-            return posts;
-    }   
+    case "LIKE_POST":
+      return posts.map((post) => {
+        if (post._id === action.payload._id) {
+          return action.payload;
+        } else {
+          return post;
+        }
+      });
 
-}
+    default:
+      return posts;
+  }
+};
