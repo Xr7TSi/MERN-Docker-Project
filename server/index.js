@@ -5,6 +5,8 @@ import postRoutes from './routes/posts.js';
 import dotenv from 'dotenv'
 
 const app = express();
+
+// dotenv is used to secure mongo login info, which is part of CONNECTION_URL
 dotenv.config();
 
 app.use(express.json({ limit: "30mb", extended: true})); //Used to parse JSON bodies
