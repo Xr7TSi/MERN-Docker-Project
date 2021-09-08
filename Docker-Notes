@@ -1,6 +1,6 @@
 CLIENT
 
-docker build -t react-app .  :  Build Fontend 
+docker build -t react-app .  :  Build Fontend with container name react-app
 
 docker run -p 3000:3000 react-app  : Run Font End
 
@@ -10,8 +10,20 @@ SERVER
 docker build -t node-app . : Build Backend
 
 
-APPLICATION
+DOCKER COMPOSE
 
-docker-compose build  : build all containers
+docker-compose build   : build all containers
 
 docker compose up  : run all containers
+
+docker image ls  : list all images
+
+docker image rm {image id}  : remove image
+
+docker ps : list open containers
+
+docker volume ls : list all volumes
+
+docker volume rm {volume id} : remove volume
+
+docker volume prune : remove unused volumes
