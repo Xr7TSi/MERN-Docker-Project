@@ -1,0 +1,17 @@
+CLIENT
+
+docker build -t react-app .  :  Build Fontend 
+
+docker run -p 3000:3000 react-app  : Run Font End
+
+
+SERVER
+
+docker build -t node-app . : Build Backend
+
+
+APPLICATION
+
+docker-compose build  : build all containers
+
+docker compose up  : run all containers
