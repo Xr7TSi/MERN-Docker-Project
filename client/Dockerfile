@@ -6,10 +6,10 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-###  Installing dependencies
+#  Install dependencies
 RUN npm install
 
-# copy local files to app folder
+# Copy app source code
 COPY . .
 
 EXPOSE 3000
