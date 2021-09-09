@@ -1,13 +1,15 @@
 version: '3.7'
 
 services:
+
+
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
     image: myapp-server
     container_name: myapp-node-server
-    command: /usr/src/app/node_modules/.bin/nodemon server.js
+    command: npm start
     ports:
       - "5000:5000"
     depends_on:
@@ -25,6 +27,8 @@ services:
       - "27017:27017"
     networks:
       - app-network
+
+
   client:
     build:
       context: ./client
@@ -32,9 +36,6 @@ services:
     image: myapp-client
     container_name: myapp-react-client
     command: npm start
-    volumes:
-      - ./client/:/usr/app
-      - /usr/app/node_modules
     depends_on:
       - server
     ports:
