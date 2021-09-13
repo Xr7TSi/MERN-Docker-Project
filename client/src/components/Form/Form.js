@@ -58,7 +58,7 @@ const Form = ( { currentId, setCurrentId}) => {
         onSubmit={handleSubmit}
       >
         {/* ternary operator-- if current id, show 'Edit', otherwise 'Create' on the .. a Memory form  */}
-        <Typography variant="h6">{currentId ? 'Edit' : 'Create' } a Memory</Typography>
+        <Typography variant="h6">{currentId ? 'Edit' : 'Create' } a Post </Typography>
         <TextField
           name="creator"
           variant="outlined"

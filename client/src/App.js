@@ -24,12 +24,6 @@ const App = () => {
         <Typography className={classes.heading} variant="h3" align="center">
           YOUR POSTS
         </Typography>
-        <img
-          className={classes.image}
-          src={memories}
-          alt="memories"
-          height="60px"
-        />
       </AppBar>
       <Grow in>
         <Container>

@@ -79,3 +79,8 @@ FLAGS
 -d : detached mode.  Allows continued use of command line.
 -v : volume mode.  Creates a volume between the host and the container.
 --name : provides name of the container
+
+
+
+
+https://www.youtube.com/watch?v=9zUHg7xjIqQ&t=552s
