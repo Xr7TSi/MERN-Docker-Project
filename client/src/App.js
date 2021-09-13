@@ -22,7 +22,7 @@ const App = () => {
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h3" align="center">
-          YOUR POSTS
+          MY POSTS
         </Typography>
       </AppBar>
       <Grow in>
