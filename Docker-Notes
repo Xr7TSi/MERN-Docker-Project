@@ -62,11 +62,13 @@ docker-compose up -d --build : run docker-compose up -d --build
 
 docker-compose down -v : run docker-compose down with delete volumes
 
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d 
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d 
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml down
 
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 
 
 
@@ -81,6 +83,29 @@ FLAGS
 --name : provides name of the container
 
 
+Push to Docker Hub:
+
+https://www.youtube.com/watch?v=iIYw0Z0AI1c
 
 
-https://www.youtube.com/watch?v=9zUHg7xjIqQ&t=552s
+Deploy on AWS ECS 
+
+https://keithweaverca.medium.com/setting-up-mern-stack-on-aws-ec2-6dc599be4737
+
+https://xiaoyunyang.github.io/post/a-complete-guide-to-deploying-your-web-app-to-amazon-web-service/
+
+
+
+Install docker on Ubuntu: https://geekylane.com/install-docker-on-aws-ec2-ubuntu-18-04-script-method/
+
+Check installed docker version: sudo docker -v
+
+
+Docker login:
+
+docker login registry-1.docker.io
+
+Push to Docker Hub:
+
+
+
