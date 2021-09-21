@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import { LockedOutlinedIcon }  from '@material-ui/icons/LockOutlined';
-import useStyles from './styles';
+import useStyles from './styles.js';
+import Input from './Input.js';
 
 
 const Auth = () => {
     const classes = useStyles();
+    const [showPassword, setShowPassword] = useState(false);
     const isSignup = false;
     const handleSubmit = () => {
         console.log('submit');
@@ -13,6 +15,8 @@ const Auth = () => {
     const handleChange = () => {
         console.log('change');
     }
+    // this toggles setShowPassword
+    const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -26,11 +30,14 @@ const Auth = () => {
                         {
                             isSignup && (
                                 <>
-                                <TextField name="firstName" label="First Name" handleChange={handleChange} autoFocus xs={6} />
-                                <TextField name="lastName" label="Last Name" handleChange={handleChange} autoFocus xs={6} />
+                                <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
+                                <Input name="lastName" label="Last Name" handleChange={handleChange} half />
                                 </>
                                 )
                         }
+                        <Input name="email" label="Email" handleChange={handleChange} type="email" />
+                        {/* if showPassword is true, show text, otherwise, show password.  this allows view to see password at entry */}
+                        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
                     </Grid>
                 </form>
             </Paper>
