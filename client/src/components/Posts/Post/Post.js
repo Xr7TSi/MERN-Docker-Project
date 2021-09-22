@@ -42,7 +42,7 @@ const Post = ({ post, setCurrentId }) => {
 
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
-                    <ThumbUpAltIcon fontsize="small" />
+                    <ThumbUpAltIcon fontSize="small" />
                     {/* &nbsp; adds space between Kike and likeCount */}
                     &nbsp; Like &nbsp;
                     {post.likeCount}
