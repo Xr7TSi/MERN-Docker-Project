@@ -14,7 +14,7 @@ import Input from "./Input.js";
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-  const isSignup = false;
+  const [isSignup, setIsSignup] = useState(false);
   const handleSubmit = () => {
     console.log("submit");
   };
@@ -25,6 +25,11 @@ const Auth = () => {
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
 
+    // this toggles setIsSignup message at bottom of form
+    const switchMode = () => {
+        setIsSignup((prevIsSignup) => !prevIsSignup);
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
@@ -34,6 +39,7 @@ const Auth = () => {
                 <Typography variant="h5">{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
+                        {/* if isSignup=true display sign up form */}
                         {
                             isSignup && (
                                 <>
@@ -42,6 +48,7 @@ const Auth = () => {
                                 </>
                                 )
                         }
+                        {/* else, display sign in form */}
                         <Input name="email" label="Email" handleChange={handleChange} type="email" />
                         {/* if showPassword is true, show text, otherwise, show password.  this allows view to see password at entry */}
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
@@ -51,6 +58,13 @@ const Auth = () => {
                     <Button tpe="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
+                    <Grid container justify="flex-end">
+                        <Grid item>
+                            <Button onClick={switchMode}>
+                                {isSignup ? 'Already have an account? Sign in' : 'Don\'t have an account? Sign up'}
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </form>
             </Paper>
         </Container>

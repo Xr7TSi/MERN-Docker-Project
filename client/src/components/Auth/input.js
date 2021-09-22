@@ -18,8 +18,10 @@ const  Input = ({ name, label, half, autoFocus, type, handleChange, handleShowPa
                 type={type}
                 InputProps={name === 'password' && {
                     endAdornment: (
+                        // InputAdornment provides space for the "eye" icon
                         <InputAdornment position="end">
                             <IconButton onClick={handleShowPassword}>
+                                {/* toggles icon visibility if there is type password (which is only in the password input on Auth.js) */}
                                 {type === "password" ? <Visibility /> : <VisibilityOff />}
                             </IconButton>
                         </InputAdornment>
