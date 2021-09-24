@@ -6,8 +6,11 @@ const authReducer = (state = { authData: null}, action) => {
             // set data from google login to local storage
         localStorage.setItem('profile', JSON.stringify({ ...action?.data }))
         return { ...state, authData: action?.data };
-        default:
-        return state;
+
+        case LOGOUT: localStorage.removeItem('profile');
+        return { ...state, authData: null };
+
+        default: return state;
     }
     }
 
