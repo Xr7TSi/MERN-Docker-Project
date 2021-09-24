@@ -7,6 +7,8 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Icon from "./icon.js";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles.js";
@@ -17,6 +19,9 @@ const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleSubmit = () => {
     console.log("submit");
   };
@@ -34,8 +39,17 @@ const Auth = () => {
 
 //   functions for google OAuth
   const googleSuccess = async (res) => {
-    console.log("Google login success!");
-    console.log(res);
+    // profileObj is part of the response from google.  The ? prevents an error if there is no response.
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    
+    try {
+      dispatch({ type: 'AUTH', data: { result, token } });
+      // redirect user to home after login
+      history.push('/')
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const googleFailure = (error) => {

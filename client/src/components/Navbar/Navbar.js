@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core'
 import useStyles from './styles.js'
 import { Link } from 'react-router-dom';
@@ -6,7 +6,15 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
     const classes = useStyles(); 
-    const user = null;
+        // get profile from local storage, set as user variable.  profile is set in reducers/auth.js
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+
+    console.log("hi" + user)
+
+    useEffect(() => {
+        const token = user?.token;
+        setUser(JSON.parse(localStorage.getItem('profile')));
+    }, []);
 
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
