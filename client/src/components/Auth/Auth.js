@@ -14,19 +14,30 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles.js";
 import Input from "./Input.js";
 import { GoogleLogin } from "react-google-login";
+import { signup, signin } from "../../actions/auth.js";
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleSubmit = () => {
-    console.log("submit");
+  const handleSubmit = (e) => {
+    // e.preventDefault stops browser refresh on form submit, which is the default behavior of the browser.
+    e.preventDefault();
+    if(isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    };
   };
-  const handleChange = () => {
-    console.log("change");
+  const handleChange = (e) => {
+    // setForma data to form Input data
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   // this toggles setShowPassword
   const handleShowPassword = () =>
@@ -112,7 +123,7 @@ const Auth = () => {
 
         {/* manual sign in button */}
           <Button
-            tpe="submit"
+            type="submit"
             fullWidth
             variant="contained"
             color="primary"
