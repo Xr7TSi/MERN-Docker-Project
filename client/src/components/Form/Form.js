@@ -59,16 +59,6 @@ const Form = ( { currentId, setCurrentId}) => {
       >
         {/* ternary operator-- if current id, show 'Edit', otherwise 'Create' on the .. a Memory form  */}
         <Typography variant="h6">{currentId ? 'Edit' : 'Create' } a Post </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        />
 
         <TextField
           name="title"
