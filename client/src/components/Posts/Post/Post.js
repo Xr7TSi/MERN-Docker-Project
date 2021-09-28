@@ -38,6 +38,7 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             {/* three dot (edit) button over image */}
+            {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
             <div className={classes.overlay2}>
                  {/* onClick setCurrentId is set to equal post._id> */}
                 <Button 
@@ -47,6 +48,9 @@ const Post = ({ post, setCurrentId }) => {
                     <MoreHorizIcon frontSize="default" />
                 </Button>
             </div>
+            )}
+
+
             <div className={classes.details}>
                 {/* map over all tags with #, the tag, then a space */}
                 <Typography variant="body2" color="textSecondary" >{post.tags.map((tag) => `#${tag} `)}</Typography>
