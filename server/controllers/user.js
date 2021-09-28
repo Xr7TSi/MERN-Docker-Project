@@ -7,6 +7,7 @@ import User from '../models/user.js';
 
 export const signin = async (req, res) => {
     const { email, password } = req.body;
+   
     try {
         const existingUser = await User.findOne({ email });
 
@@ -14,7 +15,7 @@ export const signin = async (req, res) => {
 
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
-        if(!isPasswordCorrect) return res.status(401).json({ message: "Password is incorrect"});
+        if(!isPasswordCorrect) return res.status(400).json({ message: "Password is incorrect"});
 
         // test needs to be replaced with a secret stored in a .env file
         // options other than expiresIn are available.  look into these.
@@ -23,33 +24,35 @@ export const signin = async (req, res) => {
         res.status(200).json({ result: existingUser, token });
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: "Unspecified signin error" });
     }
 }
 
 export const signup = async (req, res) => {
-    const { email, password, confirmPassword, firsName, lastName } = req.body;
+    const { email, password, confirmPassword, firstName, lastName } = req.body;
     try {
         const existingUser = await User.findOne({ email });
 
-        if(existingUser) return res.status(409).json({ message: "User already exists"});
+        if(existingUser) return res.status(400).json({ message: "User already exists"});
 
         if(password !== confirmPassword) return res.status(400).json({ message: "Passwords do not match"});
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 12);
 
-        res.status(201).json({ message: "User created", user: newUser });
-
-        const result = await User.create({ email, password: hashedPassword, name: `${firstName}` `${lastName}` });
+        const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
 
         // test needs to be replaced with a secret stored in a .env file
         // options other than expiresIn are available.  look into these.
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '1h' });
+        
 
-        res.status(201).json({ message: "User created", user: result });
+        res.status(200).json({ result, token });
+        
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: "Unspecified signup error" });
+        
+        
     }
 }
             

@@ -6,9 +6,10 @@ const postSchema = mongoose.Schema({
     creator: String,
     tags: [String],
     selectedFile: String,
-    likeCount: {
-        type: Number,
-        default: 0
+    // String value is user id stored with each like.  see controllers/posts.js
+    likes: {
+        type: [String],
+        default: []
     },
     createdAt : {
         type: Date,
