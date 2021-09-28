@@ -9,7 +9,6 @@ import useStyles from "./styles";
 
 const Form = ( { currentId, setCurrentId}) => {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -18,6 +17,7 @@ const Form = ( { currentId, setCurrentId}) => {
   const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'))
 
   // useEffect populates the form with the current post data.  [] is the dependency array-- when post changes, run ueEffect.
   useEffect(() => {
@@ -28,12 +28,22 @@ const Form = ( { currentId, setCurrentId}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(currentId) {
-      dispatch(updatePost(currentId, postData));
+      dispatch(updatePost(currentId, {...postData, name: user?.result?.name}));
     } else{
-      dispatch(createPost(postData));
+      dispatch(createPost( {...postData, name: user?.result?.name} ));
     }
     clear();
   };
+
+  if(!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+          <Typography variant="h6" align="center">
+            Please sign in to post.
+          </Typography>
+      </Paper>
+    )
+  }
 
 
 
@@ -41,7 +51,6 @@ const Form = ( { currentId, setCurrentId}) => {
   const clear = () => {
     setCurrentId(null);
     setPostData({ 
-      creator: "",
       title: "",
       message: "",
       tags: "",
