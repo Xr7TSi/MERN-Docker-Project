@@ -3,7 +3,7 @@ import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core'
 import useStyles from './styles.js'
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import decode from 'jwt-decode';
 
 const Navbar = () => {
 
@@ -29,6 +29,15 @@ const Navbar = () => {
         // when there is user.token, set user.token to variable "token"
         const token = user?.token;
         // setUser to profile data stored in local storage
+
+        // if token is expired, logout
+        if (token) {
+            const decodedToken = decode(token);
+            if(decodedToken.exp * 1000 < new Date().getTime()) {
+                logout();
+            }
+        }
+
         setUser(JSON.parse(localStorage.getItem('profile')));
         // when location changes, run this function.  Sign in pushes to ('./') see Auth.js.  Logout pushes to ('./) to refresh page.  see logout function.
        }, [location]);
