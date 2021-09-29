@@ -1,35 +1,41 @@
 version: '3.2'
 
 services:
+
+
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
-    image: mern-docker-project-server
-    container_name: mern-docker-project-node-server
+    image: myapp-server
+    container_name: myapp-node-server
+    command: npm start
     ports:
       - "5000:5000"
     depends_on:
       - mongo
     env_file: ./server/.env
-
+    environment:
+      - NODE_ENV=production
     networks:
       - app-network
-
   mongo:
     image: mongo
-  
+    volumes:
+      - data-volume:/data/db
     ports:
       - "27017:27017"
     networks:
       - app-network
 
+
   client:
     build:
       context: ./client
       dockerfile: Dockerfile
-    image: mern-docker-project-client
-    container_name: mern-docker-project-react-client
+    image: myapp-client
+    container_name: myapp-react-client
+    command: npm start
     depends_on:
       - server
     ports:
@@ -40,4 +46,10 @@ services:
 networks:
     app-network:
         driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local
 
