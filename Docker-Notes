@@ -14,7 +14,7 @@ DOCKER COMPOSE
 
 docker-compose build   : build all containers
 
-docker compose up  : run all containers
+docker-compose up  : run all containers
 
 docker image ls  : list all images
 

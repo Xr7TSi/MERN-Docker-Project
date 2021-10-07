@@ -1,7 +1,6 @@
 version: '3.2'
 
 services:
-
   server:
     build:
       context: ./server
@@ -10,8 +9,18 @@ services:
     container_name: mern-docker-project-node-server
     ports:
       - "5000:5000"
+    depends_on:
+      - mongo
     env_file: ./server/.env
 
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo
+  
+    ports:
+      - "27017:27017"
     networks:
       - app-network
 
@@ -32,3 +41,4 @@ services:
 networks:
     app-network:
         driver: bridge
+
